@@ -2,6 +2,10 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.ts'
+import { Amplify } from "aws-amplify"
+import outputs from "../amplify_outputs.json"
+
+Amplify.configure(outputs)
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
