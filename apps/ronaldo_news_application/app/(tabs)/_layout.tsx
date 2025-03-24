@@ -25,6 +25,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="newspaper-o" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="dynamo"
+        options={{
+          headerShown: false,
+          title: 'dynamo',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="newspaper-o" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
