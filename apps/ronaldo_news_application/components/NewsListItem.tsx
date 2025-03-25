@@ -1,14 +1,16 @@
 import { View, Text, Image } from "react-native";
 import { Link } from "expo-router";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-
+import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 
 export default function NewsListItem({newsarticle}: {newsarticle: any}) {
-    
-    
+  const [imageError, setImageError] = useState(false);
+  
+  // Debug the image URL
+  console.log('News article image URL:', newsarticle.image);
+  
   return (
-    
     <View style={{margin: 10, marginTop: 10, backgroundColor: '#FFFF', padding: 10, borderRadius: 10, gap: 10}}>
         <View style={{flexDirection: 'row',}}>
         <View style={{flexShrink: 1, marginRight: 10}}>
@@ -17,7 +19,21 @@ export default function NewsListItem({newsarticle}: {newsarticle: any}) {
         <Text style={{fontSize: 18, fontWeight: 'bold',}}>{newsarticle.title}</Text>
         </View>
        
-        <Image source={{uri: newsarticle.image}} style={{width: 100, aspectRatio: 1, marginTop: 50, borderRadius: 10, marginLeft: 'auto', }} />
+        {newsarticle.image && !imageError ? (
+          <Image 
+            source={{uri: newsarticle.image}} 
+            style={{width: 100, aspectRatio: 1, marginTop: 50, borderRadius: 10, marginLeft: 'auto'}}
+            onError={() => {
+              console.log('Image failed to load:', newsarticle.image);
+              setImageError(true);
+            }}
+          />
+        ) : (
+          <Image
+            source={require('@assets/images/comets_logo_small.png')}
+            style={{width: 100, aspectRatio: 1, marginTop: 50, borderRadius: 10, marginLeft: 'auto'}}
+          />
+        )}
   
         </View>
         

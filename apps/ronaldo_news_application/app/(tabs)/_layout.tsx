@@ -28,7 +28,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="dynamo"
         options={{
-          headerShown: false,
+          headerShown: true,
           title: 'dynamo',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="newspaper-o" color={color} />,
         }}

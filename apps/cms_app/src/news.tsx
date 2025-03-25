@@ -1,7 +1,7 @@
 import type { Schema } from "../../../packages/my-shared-backend/amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { uploadData, getUrl } from "aws-amplify/storage";
-import { getCurrentUser, signOut as amplifySignOut } from "aws-amplify/auth";
+import { getCurrentUser } from "aws-amplify/auth";
 import ReactDOM from "react-dom/client";
 import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
@@ -102,7 +102,10 @@ function NewsApp({ signOut, user }: { signOut: () => void, user: any }) {
         setPublisherModelAvailable(publisherAvailable);
         
         if (newsAvailable) {
-          // No need to fetch articles in this simplified version
+          // Fetch news articles
+          const newsResult = await client.models.News.list({});
+          const articles: NewsArticle[] = newsResult.data || [];
+          console.log('Fetched articles:', articles);
         }
         
         if (authorAvailable) {
